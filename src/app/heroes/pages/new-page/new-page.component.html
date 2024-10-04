@@ -12,14 +12,16 @@
         <mat-card>
 
             <mat-card-content>
-                <div class="grid">
+
+                <form class="grid" [formGroup]="heroForm" (ngSubmit)="onSubmit()">
 
                     <mat-form-field class="col-12 sm:col-6">
                         <mat-label>Super héroe</mat-label>
                         <input 
                             matInput
                             type="text"
-                            required    
+                            required  
+                            formControlName="superhero"
                         />
                     </mat-form-field>
 
@@ -28,7 +30,8 @@
                         <input 
                             matInput
                             type="text"
-                            required    
+                            required
+                            formControlName="alter_ego"
                         />
                     </mat-form-field>
 
@@ -37,13 +40,27 @@
                         <input 
                             matInput
                             type="text"
-                            required    
+                            required
+                            formControlName="first_appearance"
+                        />
+                    </mat-form-field>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Personajes</mat-label>
+                        <input 
+                            matInput
+                            type="text"
+                            required
+                            formControlName="characters"
                         />
                     </mat-form-field>
 
                     <mat-form-field class="col-12">
                         <mat-label>Creador</mat-label>
-                        <mat-select required="">
+                        <mat-select 
+                            formControlName="publisher"
+                            required
+                        >
                             <mat-option *ngFor="let publisher of publishers"
                                 [value]="publisher.id"    
                             >
@@ -52,7 +69,17 @@
                         </mat-select>
                     </mat-form-field>
 
-                </div>
+
+                    <mat-form-field class="col-12">
+                        <mat-label>Alternative Image</mat-label>
+                        <input 
+                            matInput
+                            type="text"
+                            formControlName="alt_img"
+                        />
+                    </mat-form-field>
+
+                </form>
 
                 <div class="flex justify-content-between">
                     <button 
@@ -65,6 +92,7 @@
                     <button 
                         mat-flat-button
                         color="primary"
+                        (click)="onSubmit()"
                     >
                         <mat-icon>save</mat-icon>
                         Guardar
@@ -82,7 +110,7 @@
 
         <mat-card>
 
-            <img src="" alt="Imagen de héroe" mat-card-image>
+            <img [src]=" currentHero | heroImage " alt="Imagen de héroe" mat-card-image>
 
         </mat-card>
 
