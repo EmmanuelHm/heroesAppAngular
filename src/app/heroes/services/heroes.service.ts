@@ -36,7 +36,7 @@ export class HeroesService {
     
     // Agregar un Heroe
     public addHero( hero: Heroe ): Observable<Heroe>{
-        return this.http.post<Heroe>(`${this.baseUrl}/heroe`, hero );
+        return this.http.post<Heroe>(`${this.baseUrl}/heroes`, hero );
     }
 
     // Actualizar un Heroe
@@ -45,16 +45,16 @@ export class HeroesService {
         if(!hero.id) throw Error('Hero id is required');
 
         // return this.http.put<Heroe>(`${this.baseUrl}/heroe/${ hero.id }`, hero );  //Actualiza completamente un obj
-        return this.http.patch<Heroe>(`${this.baseUrl}/heroe/${ hero.id }`, hero );   //Actualiza parcialmente
+        return this.http.patch<Heroe>(`${this.baseUrl}/heroes/${ hero.id }`, hero );   //Actualiza parcialmente
     }
 
     // Borrar un Heroe
     public deleteHeroById( id: string ): Observable<boolean>{
 
-        return this.http.delete<boolean>(`${this.baseUrl}/heroe/${ id }`)
+        return this.http.delete<boolean>(`${this.baseUrl}/heroes/${ id }`)
             .pipe(
-                catchError( err => of(false) ),
                 map( resp => true ),
+                catchError( err => of(false) ),
             );
     }
 }
